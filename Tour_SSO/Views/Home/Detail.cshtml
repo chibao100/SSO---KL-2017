@@ -1,0 +1,39 @@
+﻿<div class="row">
+    
+    <!-- Gallery Items 'Roboto',sans-serif
+    ================================================== -->
+    <div class="span12 gallery-single">
+
+        <div class="row">
+            <div class="span6">
+                <img src="@Model.Image" class="align-left thumbnail" width="770" height="100" alt="image">
+            </div>
+            <div class="span6">
+                <h2>@Model.Name</h2>
+                <p class="lead">Rating</p>
+                <ul class="project-info">
+                    <li><h6>Mã Tour:</h6> @Model.TourId</li>
+                    <li><h6>Ngày khởi hành:</h6> @Html.FormatValue(Model.StartDate, "{0:dd-MM-yyyy}")</li>
+                    <li><h6>Nơi khởi hành:</h6> @Model.Note</li>
+                    <li><h6>Số ngày:</h6> @Model.Days</li>            
+                    <li><h6>Giá:</h6> @Html.FormatValue(Model.Price, "{0:#,###}") @Model.UnitPrice</li>            
+                    <li><h6>Cỏn nhận:</h6> @Model.Avaiable</li>                    
+                </ul>
+
+                <h1><input type="button" class="btn btn-warning pull-left" value="Đặt" width="100" /></h1>
+                <a href="#" class="pull-right"><i class="icon-arrow-left"></i>Back to Gallery</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span8">
+                @Html.Raw(Model.Description)
+            </div>
+            <div class="span4">
+
+            </div>
+        </div>
+
+    </div><!-- End gallery-single-->
+
+</div><!-- End container row -->

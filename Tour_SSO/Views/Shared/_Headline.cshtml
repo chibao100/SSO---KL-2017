@@ -1,0 +1,99 @@
+﻿@{
+    var StartPlace = Tour_SSO.Models.ViewModel.StartPlace.Place();
+    var Arrivel = Tour_SSO.Models.ViewModel.StartPlace.FindCountry();
+}
+<div class="row headline">
+    <!-- Begin Headline -->
+    <!-- Slider Carousel
+    ================================================== -->
+    <div class="span8">
+        <div class="flexslider">
+            <ul class="slides">
+                <li><a href="gallery-single.htm"><img src="~/Assests/img/gallery/slider-img-1.jpg" alt="slider" /></a></li>
+                <li><a href="gallery-single.htm"><img src="~/Assests/img/gallery/slider-img-1.jpg" alt="slider" /></a></li>
+                <li><a href="gallery-single.htm"><img src="~/Assests/img/gallery/slider-img-1.jpg" alt="slider" /></a></li>
+                <li><a href="gallery-single.htm"><img src="~/Assests/img/gallery/slider-img-1.jpg" alt="slider" /></a></li>
+                <li><a href="gallery-single.htm"><img src="~/Assests/img/gallery/slider-img-1.jpg" alt="slider" /></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Headline Text
+    ================================================== -->
+    <div class="span4">
+        <form action="/Home/Search" method="post">
+            <div class="form-group">
+                <label class="col-md-2">Loại Tour</label>
+                <div class="col-md-6">
+                    <select name="TourType" class="TourType">
+                        <option value="1">Trong nước</option>
+                        <option value="2">Ngoài nước</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Nơi khởi hành</label>
+                <div class="col-md-6">
+                    <select name="StartPlace">
+                        <option>Nơi khởi hành</option>
+                        @for (int i = 0; i < StartPlace.Count(); i++)
+                        {
+                            <option value="@StartPlace[i]" >@StartPlace[i]</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Nơi đến</label>
+                <div class="col-md-6">
+                    <select name="ArrivelPlace" class="ArrivelPlace">
+                        <option>Nơi đến</option>
+                        @for (int i = 0; i < Arrivel.Count(); i++)
+                        {
+                            <option value="@Arrivel[i]">@Arrivel[i]</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Giá</label>
+                <div class="col-md-6">
+                    <select name="Price">
+                        <option>Giá</option>
+                        <option>Dưới 1 Triệu</option>
+                        <option>1 - 2 Triệu</option>
+                        <option>2 - 4 Triệu</option>
+                        <option>4 - 6 Triệu</option>
+                        <option>Trên 6 Triệu</option>
+                    </select>
+                </div>
+            </div>           
+            <div class="form-group">
+                <label class="col-md-2">Ngày khởi hành</label>
+                <div class="col-md-6">
+                    <input type="date" name="StartDate" class="form-control" />
+                </div>
+            </div>
+            <button class="btn btn-danger"><i class="glyphicon glyphicon-pencil"> Tìm Kiếm</i></button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(".TourType").change(function () {
+        var Type = $(this).val();
+        var a = "<option>Nơi đến</option>";
+        $.ajax({
+            url: "/Home/FindCountry",
+            data: { Type: Type },
+            success: function (res) {
+                $(res).each(function (i, e) {
+
+                    a = a + "<option value=\"" + e + "\">" + e + "</option>";
+                   
+                });
+                $(".ArrivelPlace").find('option').remove().end().append(a);
+            }
+        });
+    })
+</script>

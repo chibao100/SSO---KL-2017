@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie", "Movie\Movie.csproj", "{7A51A346-34B1-4205-A579-C78E71CEC079}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tour_SSO", "..\..\Documents\Visual Studio 2015\Projects\Tour_SSO\Tour_SSO\Tour_SSO.csproj", "{55C8FE96-41E3-479F-9A4C-D4140ED14988}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7A51A346-34B1-4205-A579-C78E71CEC079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A51A346-34B1-4205-A579-C78E71CEC079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A51A346-34B1-4205-A579-C78E71CEC079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55C8FE96-41E3-479F-9A4C-D4140ED14988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55C8FE96-41E3-479F-9A4C-D4140ED14988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55C8FE96-41E3-479F-9A4C-D4140ED14988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55C8FE96-41E3-479F-9A4C-D4140ED14988}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
