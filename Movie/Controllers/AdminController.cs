@@ -20,7 +20,7 @@ namespace Movie.Controllers
         //sasdasdasdadasdsaSAs
         public ActionResult Index()
         {
-            string k = "";
+            string k = "test";
             return View();
         }
 
