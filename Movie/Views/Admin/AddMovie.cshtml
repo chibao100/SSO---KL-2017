@@ -1,0 +1,107 @@
+﻿@model Movie.ViewModel.AddMovieViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="myForm">
+    @using (Html.BeginForm("AddMovie", "Admin", FormMethod.Post, new { @class = "my_form", @encType = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <p><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="myHeader"> Thêm Phim Mới</span></p>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label>Ảnh Bìa Phim:</label>
+            @Html.TextBoxFor(model => Model.UploadFiles, new { @type = "file", @name = "UploadFiles" })
+        </div>
+        <div class="form-group">
+            <label>Tên Phim:</label>
+            @Html.TextBoxFor(model => Model.TenPhim, new { @class = "form-control", @type = "text" })
+        </div>
+        <div class="form-group">
+            <label>Giới thiệu:</label>
+            @Html.TextAreaFor(model => Model.GioiThieu, new { @class = "form-control myTextArea", @rows = "6" })
+        </div>
+        <div class="form-group">
+            <label>Ngày Công Chiếu:</label>
+            @Html.TextBoxFor(model => Model.NgayCongChieu, new { @class = "form-control", @type = "date" })
+        </div>
+        <div class="form-group">
+            <label>Đạo diễn:</label>
+            @Html.TextBoxFor(model => Model.DaoDien, new { @class = "form-control", @type = "text" })
+        </div>
+        <div class="form-group">
+            <label>Năm Sản Xuất</label>
+            @Html.TextBoxFor(model => Model.NamSanXuat, new { @class = "form-control namsanxuat", @type = "number" })
+        </div>
+        <div class="form-group">
+            <label>Tổng Số Tập</label>
+            @Html.TextBoxFor(model => Model.TongSoTap, new { @class = "form-control namsanxuat", @type = "number" })
+        </div>
+        <div class="form-group">
+            <label>Thể Loại Phim:</label>
+            @Html.ListBoxFor(model => Model.SelectedTheLoais, new MultiSelectList(Model.TheLoaiPhims, "id", "tentheloai"), new { @class = "theloais", @data_placeholder = " ", @multiple = "multiple" })
+        </div>
+        <div class="form-group">
+            <label>Quốc Gia:</label>
+            @Html.ListBoxFor(model => Model.SelectedQuocGias, new MultiSelectList(Model.QuocGias, "id", "tenquocgia"), new { @class = "quocgias", @data_placeholder = " ", @multiple = "multiple" })
+        </div>
+        <div class="form-group">
+            <label>Diễn Viên</label>
+            @Html.ListBoxFor(model => Model.SelectedDienViens, new MultiSelectList(Model.DienViens, "id", "tendienvien"), new { @class = "dienviens", @data_placeholder = " ", @multiple = "multiple" })
+        </div>
+        <div class="form-group pull-right">
+            <input type="submit" value="Xác Nhận" class="btn btn-primary" />
+            <input type="button" value="Làm Mới" class="btn btn-danger" />
+        </div>
+        <div class="clearfix"></div>
+    }
+</div>
+
+
+
+
+
+<style>
+  
+
+    .myForm {
+        background-color: white;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        padding: 20px;
+    }
+    .myTextArea {
+        resize: vertical;
+    }
+    .glyphicon.glyphicon-cog {
+        font-size: 26px;
+    }
+    .myHeader{
+        font-size: 28px;
+    }
+    .chosen-container {
+        width: 100% !important;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $(".theloais").chosen({
+            no_results_text: "Oops, nothing found!",
+            search_contains: true
+        });
+
+       
+        
+        $(".quocgias").chosen({
+            no_results_text: "Oops, nothing found!",
+            search_contains: true
+        });
+        $(".dienviens").chosen({
+            no_results_text: "Oops, nothing found!",
+            search_contains: true
+        });
+
+        $(".namsanxuat").val("");
+    });
+</script>

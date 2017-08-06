@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="movieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dienvien">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tendienvien" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="anhdaidien" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nguoidung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hoten" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="taikhoan" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="matkhau" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="anhdaidien" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="phim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenphim" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="gioithieuphim" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ngaycongchieu" Type="datetime" Nullable="false" />
+          <Property Name="daodien" Type="nvarchar" MaxLength="100" />
+          <Property Name="namsanxuat" Type="int" Nullable="false" />
+          <Property Name="luotxem" Type="int" Nullable="false" />
+          <Property Name="danhgiaphim" Type="float" Nullable="false" />
+          <Property Name="anhbiaphim" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="tongsotap" Type="int" />
+        </EntityType>
+        <EntityType Name="phim_dienvien">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idphim" Type="int" Nullable="false" />
+          <Property Name="iddienvien" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="phim_quocgia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idphim" Type="int" Nullable="false" />
+          <Property Name="idquocgia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="phim_theloaiphim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idphim" Type="int" Nullable="false" />
+          <Property Name="idtheloaiphim" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="phimitem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idphim" Type="int" Nullable="false" />
+          <Property Name="tap" Type="int" Nullable="false" />
+          <Property Name="link" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="tentapphim" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="linkdowload" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="quocgia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenquocgia" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="theloaiphim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tentheloai" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PhimDienvien_1">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phim_dienvien" Type="Self.phim_dienvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_dienvien">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimDienvien_2">
+          <End Role="dienvien" Type="Self.dienvien" Multiplicity="1" />
+          <End Role="phim_dienvien" Type="Self.phim_dienvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dienvien">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_dienvien">
+              <PropertyRef Name="iddienvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimPhimitem">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phimitem" Type="Self.phimitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phimitem">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimQuocgia_1">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phim_quocgia" Type="Self.phim_quocgia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_quocgia">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimQuocgia_2">
+          <End Role="quocgia" Type="Self.quocgia" Multiplicity="1" />
+          <End Role="phim_quocgia" Type="Self.phim_quocgia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quocgia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_quocgia">
+              <PropertyRef Name="idquocgia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimTheloaiphim_1">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phim_theloaiphim" Type="Self.phim_theloaiphim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_theloaiphim">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimTheloaiphim_2">
+          <End Role="theloaiphim" Type="Self.theloaiphim" Multiplicity="1" />
+          <End Role="phim_theloaiphim" Type="Self.phim_theloaiphim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theloaiphim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_theloaiphim">
+              <PropertyRef Name="idtheloaiphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="movieModelStoreContainer">
+          <EntitySet Name="dienvien" EntityType="Self.dienvien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nguoidung" EntityType="Self.nguoidung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phim" EntityType="Self.phim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phim_dienvien" EntityType="Self.phim_dienvien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phim_quocgia" EntityType="Self.phim_quocgia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phim_theloaiphim" EntityType="Self.phim_theloaiphim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phimitem" EntityType="Self.phimitem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quocgia" EntityType="Self.quocgia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="theloaiphim" EntityType="Self.theloaiphim" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PhimDienvien_1" Association="Self.FK_PhimDienvien_1">
+            <End Role="phim" EntitySet="phim" />
+            <End Role="phim_dienvien" EntitySet="phim_dienvien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimDienvien_2" Association="Self.FK_PhimDienvien_2">
+            <End Role="dienvien" EntitySet="dienvien" />
+            <End Role="phim_dienvien" EntitySet="phim_dienvien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimPhimitem" Association="Self.FK_PhimPhimitem">
+            <End Role="phim" EntitySet="phim" />
+            <End Role="phimitem" EntitySet="phimitem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimQuocgia_1" Association="Self.FK_PhimQuocgia_1">
+            <End Role="phim" EntitySet="phim" />
+            <End Role="phim_quocgia" EntitySet="phim_quocgia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimQuocgia_2" Association="Self.FK_PhimQuocgia_2">
+            <End Role="quocgia" EntitySet="quocgia" />
+            <End Role="phim_quocgia" EntitySet="phim_quocgia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimTheloaiphim_1" Association="Self.FK_PhimTheloaiphim_1">
+            <End Role="phim" EntitySet="phim" />
+            <End Role="phim_theloaiphim" EntitySet="phim_theloaiphim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimTheloaiphim_2" Association="Self.FK_PhimTheloaiphim_2">
+            <End Role="theloaiphim" EntitySet="theloaiphim" />
+            <End Role="phim_theloaiphim" EntitySet="phim_theloaiphim" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="movieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dienvien">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tendienvien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="anhdaidien" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="phim_dienvien" Relationship="Self.FK_PhimDienvien_2" FromRole="dienvien" ToRole="phim_dienvien" />
+        </EntityType>
+        <EntityType Name="nguoidung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="taikhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="matkhau" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="anhdaidien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="phim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenphim" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gioithieuphim" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ngaycongchieu" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="daodien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="namsanxuat" Type="Int32" Nullable="false" />
+          <Property Name="luotxem" Type="Int32" Nullable="false" />
+          <Property Name="danhgiaphim" Type="Double" Nullable="false" />
+          <Property Name="anhbiaphim" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tongsotap" Type="Int32" />
+          <NavigationProperty Name="phim_dienvien" Relationship="Self.FK_PhimDienvien_1" FromRole="phim" ToRole="phim_dienvien" />
+          <NavigationProperty Name="phimitems" Relationship="Self.FK_PhimPhimitem" FromRole="phim" ToRole="phimitem" />
+          <NavigationProperty Name="phim_quocgia" Relationship="Self.FK_PhimQuocgia_1" FromRole="phim" ToRole="phim_quocgia" />
+          <NavigationProperty Name="phim_theloaiphim" Relationship="Self.FK_PhimTheloaiphim_1" FromRole="phim" ToRole="phim_theloaiphim" />
+        </EntityType>
+        <EntityType Name="phim_dienvien">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idphim" Type="Int32" Nullable="false" />
+          <Property Name="iddienvien" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dienvien" Relationship="Self.FK_PhimDienvien_2" FromRole="phim_dienvien" ToRole="dienvien" />
+          <NavigationProperty Name="phim" Relationship="Self.FK_PhimDienvien_1" FromRole="phim_dienvien" ToRole="phim" />
+        </EntityType>
+        <EntityType Name="phim_quocgia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idphim" Type="Int32" Nullable="false" />
+          <Property Name="idquocgia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="phim" Relationship="Self.FK_PhimQuocgia_1" FromRole="phim_quocgia" ToRole="phim" />
+          <NavigationProperty Name="quocgia" Relationship="Self.FK_PhimQuocgia_2" FromRole="phim_quocgia" ToRole="quocgia" />
+        </EntityType>
+        <EntityType Name="phim_theloaiphim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idphim" Type="Int32" Nullable="false" />
+          <Property Name="idtheloaiphim" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="phim" Relationship="Self.FK_PhimTheloaiphim_1" FromRole="phim_theloaiphim" ToRole="phim" />
+          <NavigationProperty Name="theloaiphim" Relationship="Self.FK_PhimTheloaiphim_2" FromRole="phim_theloaiphim" ToRole="theloaiphim" />
+        </EntityType>
+        <EntityType Name="phimitem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idphim" Type="Int32" Nullable="false" />
+          <Property Name="tap" Type="Int32" Nullable="false" />
+          <Property Name="link" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tentapphim" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="linkdowload" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="phim" Relationship="Self.FK_PhimPhimitem" FromRole="phimitem" ToRole="phim" />
+        </EntityType>
+        <EntityType Name="quocgia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenquocgia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="phim_quocgia" Relationship="Self.FK_PhimQuocgia_2" FromRole="quocgia" ToRole="phim_quocgia" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="theloaiphim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tentheloai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="phim_theloaiphim" Relationship="Self.FK_PhimTheloaiphim_2" FromRole="theloaiphim" ToRole="phim_theloaiphim" />
+        </EntityType>
+        <Association Name="FK_PhimDienvien_2">
+          <End Role="dienvien" Type="Self.dienvien" Multiplicity="1" />
+          <End Role="phim_dienvien" Type="Self.phim_dienvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dienvien">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_dienvien">
+              <PropertyRef Name="iddienvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimDienvien_1">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phim_dienvien" Type="Self.phim_dienvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_dienvien">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimPhimitem">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phimitem" Type="Self.phimitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phimitem">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimQuocgia_1">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phim_quocgia" Type="Self.phim_quocgia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_quocgia">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimTheloaiphim_1">
+          <End Role="phim" Type="Self.phim" Multiplicity="1" />
+          <End Role="phim_theloaiphim" Type="Self.phim_theloaiphim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_theloaiphim">
+              <PropertyRef Name="idphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimQuocgia_2">
+          <End Role="quocgia" Type="Self.quocgia" Multiplicity="1" />
+          <End Role="phim_quocgia" Type="Self.phim_quocgia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quocgia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_quocgia">
+              <PropertyRef Name="idquocgia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhimTheloaiphim_2">
+          <End Role="theloaiphim" Type="Self.theloaiphim" Multiplicity="1" />
+          <End Role="phim_theloaiphim" Type="Self.phim_theloaiphim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theloaiphim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phim_theloaiphim">
+              <PropertyRef Name="idtheloaiphim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="movieEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dienviens" EntityType="Self.dienvien" />
+          <EntitySet Name="nguoidungs" EntityType="Self.nguoidung" />
+          <EntitySet Name="phims" EntityType="Self.phim" />
+          <EntitySet Name="phim_dienvien" EntityType="Self.phim_dienvien" />
+          <EntitySet Name="phim_quocgia" EntityType="Self.phim_quocgia" />
+          <EntitySet Name="phim_theloaiphim" EntityType="Self.phim_theloaiphim" />
+          <EntitySet Name="phimitems" EntityType="Self.phimitem" />
+          <EntitySet Name="quocgias" EntityType="Self.quocgia" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="theloaiphims" EntityType="Self.theloaiphim" />
+          <AssociationSet Name="FK_PhimDienvien_2" Association="Self.FK_PhimDienvien_2">
+            <End Role="dienvien" EntitySet="dienviens" />
+            <End Role="phim_dienvien" EntitySet="phim_dienvien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimDienvien_1" Association="Self.FK_PhimDienvien_1">
+            <End Role="phim" EntitySet="phims" />
+            <End Role="phim_dienvien" EntitySet="phim_dienvien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimPhimitem" Association="Self.FK_PhimPhimitem">
+            <End Role="phim" EntitySet="phims" />
+            <End Role="phimitem" EntitySet="phimitems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimQuocgia_1" Association="Self.FK_PhimQuocgia_1">
+            <End Role="phim" EntitySet="phims" />
+            <End Role="phim_quocgia" EntitySet="phim_quocgia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimTheloaiphim_1" Association="Self.FK_PhimTheloaiphim_1">
+            <End Role="phim" EntitySet="phims" />
+            <End Role="phim_theloaiphim" EntitySet="phim_theloaiphim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimQuocgia_2" Association="Self.FK_PhimQuocgia_2">
+            <End Role="quocgia" EntitySet="quocgias" />
+            <End Role="phim_quocgia" EntitySet="phim_quocgia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhimTheloaiphim_2" Association="Self.FK_PhimTheloaiphim_2">
+            <End Role="theloaiphim" EntitySet="theloaiphims" />
+            <End Role="phim_theloaiphim" EntitySet="phim_theloaiphim" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="movieModelStoreContainer" CdmEntityContainer="movieEntities">
+          <EntitySetMapping Name="dienviens">
+            <EntityTypeMapping TypeName="movieModel.dienvien">
+              <MappingFragment StoreEntitySet="dienvien">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tendienvien" ColumnName="tendienvien" />
+                <ScalarProperty Name="anhdaidien" ColumnName="anhdaidien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nguoidungs">
+            <EntityTypeMapping TypeName="movieModel.nguoidung">
+              <MappingFragment StoreEntitySet="nguoidung">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="taikhoan" ColumnName="taikhoan" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="anhdaidien" ColumnName="anhdaidien" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phims">
+            <EntityTypeMapping TypeName="movieModel.phim">
+              <MappingFragment StoreEntitySet="phim">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="gioithieuphim" ColumnName="gioithieuphim" />
+                <ScalarProperty Name="ngaycongchieu" ColumnName="ngaycongchieu" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="namsanxuat" ColumnName="namsanxuat" />
+                <ScalarProperty Name="luotxem" ColumnName="luotxem" />
+                <ScalarProperty Name="danhgiaphim" ColumnName="danhgiaphim" />
+                <ScalarProperty Name="anhbiaphim" ColumnName="anhbiaphim" />
+                <ScalarProperty Name="tongsotap" ColumnName="tongsotap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phim_dienvien">
+            <EntityTypeMapping TypeName="movieModel.phim_dienvien">
+              <MappingFragment StoreEntitySet="phim_dienvien">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idphim" ColumnName="idphim" />
+                <ScalarProperty Name="iddienvien" ColumnName="iddienvien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phim_quocgia">
+            <EntityTypeMapping TypeName="movieModel.phim_quocgia">
+              <MappingFragment StoreEntitySet="phim_quocgia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idphim" ColumnName="idphim" />
+                <ScalarProperty Name="idquocgia" ColumnName="idquocgia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phim_theloaiphim">
+            <EntityTypeMapping TypeName="movieModel.phim_theloaiphim">
+              <MappingFragment StoreEntitySet="phim_theloaiphim">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idphim" ColumnName="idphim" />
+                <ScalarProperty Name="idtheloaiphim" ColumnName="idtheloaiphim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phimitems">
+            <EntityTypeMapping TypeName="movieModel.phimitem">
+              <MappingFragment StoreEntitySet="phimitem">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idphim" ColumnName="idphim" />
+                <ScalarProperty Name="tap" ColumnName="tap" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="tentapphim" ColumnName="tentapphim" />
+                <ScalarProperty Name="linkdowload" ColumnName="linkdowload" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quocgias">
+            <EntityTypeMapping TypeName="movieModel.quocgia">
+              <MappingFragment StoreEntitySet="quocgia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tenquocgia" ColumnName="tenquocgia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="movieModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="theloaiphims">
+            <EntityTypeMapping TypeName="movieModel.theloaiphim">
+              <MappingFragment StoreEntitySet="theloaiphim">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tentheloai" ColumnName="tentheloai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

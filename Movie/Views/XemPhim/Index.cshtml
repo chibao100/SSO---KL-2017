@@ -1,0 +1,190 @@
+﻿@model Movie.ViewModel.WatchMovieViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutXemPhim.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row part1">
+        <iframe class="phim col-sm-8"  src="@Model.PhimItems[Model.PhimItemSelected].link" frameborder="0" allowfullscreen></iframe>
+        <div class="col-sm-4" >
+            <div class="panel panel-success danhsachtap">
+               
+                <div class="panel-body">
+                    <table class="table table-hover" cellpadding="5" cellspacing="5">
+                        <thead></thead>
+                        <tbody class="taps">
+                            @for (int i = 0; i < Model.PhimItems.Count(); i++)
+                            {
+                                if (i == Model.PhimItemSelected)
+                                {
+                                    <tr class="active" onclick="window.location='/XemPhim/IdPhim?id=@Model.ID&tap=@Model.PhimItems[i].tap'">
+                                        <td class="col-sm-1">
+                                            <span class="glyphicon glyphicon-ok text-success"></span>
+                                        </td>
+                                        <td>
+
+                                            <span class="text-primary">@Model.PhimItems[i].tentapphim</span>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr onclick="window.location='/XemPhim/IdPhim?id=@Model.ID&tap=@Model.PhimItems[i].tap'">
+                                        <td class="col-sm-1"></td>
+                                        <td>
+
+                                            <span class="text-primary">@Model.PhimItems[i].tentapphim</span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" >
+    <div class="row part2">
+        <div class="col-sm-12">
+            <h3 class="text-primary">@Model.TenPhim</h3>
+            <p>Số Tập: 22/44</p>
+            <p>Lượt xem: 1500</p>
+            <p>Bình chọn: 7/10</p>
+            <p>Giới thiệu phim: <span class="item">@Model.GioiThieu</span></p>
+        </div>
+
+        <div class="col-sm-12">
+            <h3 class="text-primary part3">Bình luận</h3>
+            <div class="row">
+                <div class="col-sm-1">Chí Bảo</div>
+                <div class="col-sm-11"><textarea class="form-control" rows="3"></textarea></div>
+            </div>
+            
+            <hr />
+            <table @*style="min-height:600px;"*@>
+
+            </table>
+            
+            
+           
+            <div class="text-center">
+                <button class="btn btn-danger">Hiển thị thêm</button>
+            </div>
+        </div>
+
+    </div> 
+</div>
+
+
+
+
+
+<style>
+
+    .container-fluid .part1 {
+        margin-top: 10px;
+        height: 500px;
+    }
+    iframe{
+        height: inherit;
+    }
+
+    .danhsachtap {
+        height:500px;
+    }
+
+    .part2 {
+        background-color: white;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    textarea{
+        resize:vertical;
+    }
+
+    .taps tr {
+        cursor: pointer;
+        font-size: 1.2em;
+    }
+   
+</style>
+
+
+<script>
+
+    function Searching() {
+        var ten = $('#searching').val();
+        var theloais = "";
+        var quocgias = "";
+        var searchtheloais = document.getElementsByClassName("searchtheloais");
+        var searchquocgias = document.getElementsByClassName("searchquocgias");
+        for (var i = 0; i < searchtheloais.length; i++) {
+            if (searchtheloais[i].checked == true) {
+                theloais += $(searchtheloais[i]).val() + ",";
+            }
+        }
+
+        for (var i = 0; i < searchquocgias.length; i++) {
+            if (searchquocgias[i].checked == true) {
+                quocgias += $(searchquocgias[i]).val() + ",";
+            }
+        }
+
+
+
+        window.location = "/TimKiem?phim=" + ten + "&theloais=" + theloais + "&quocgias=" + quocgias;
+
+    }
+
+
+  
+
+
+    $(document).ready(function () {
+        $('#searching').keyup(function (event) {
+            if (event.keyCode == 13) {
+                Searching();
+            }
+        });
+
+    });
+
+    $(function () { /* to make sure the script runs after page load */
+
+        $('.item').each(function (event) { /* select all divs with the item class */
+
+            var max_length = 150; /* set the max content length before a read more link will be added */
+
+            if ($(this).html().length > max_length) { /* check for content length */
+
+                var short_content = $(this).html().substr(0, max_length); /* split the content in two parts */
+                var long_content = $(this).html().substr(max_length);
+
+                $(this).html(short_content +
+                             '<a href="#" class="read_more">... Read More</a>' +
+                             '<span class="more_text" style="display:none;">' + long_content + '</span>'); /* Alter the html to allow the read more functionality */
+
+                $(this).find('a.read_more').click(function (event) { /* find the a.read_more element within the new html and bind the following code to it */
+
+                    event.preventDefault(); /* prevent the a from changing the url */
+                    $(this).hide(); /* hide the read more button */
+                    $(this).parents('.item').find('.more_text').show(); /* show the .more_text span */
+
+                });
+
+            }
+
+        });
+
+
+    });
+
+
+</script>

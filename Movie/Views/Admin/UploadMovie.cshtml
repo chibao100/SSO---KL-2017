@@ -1,0 +1,86 @@
+﻿@model Movie.ViewModel.UploadMovieViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="myForm">
+    <form action="/Admin/ImportPhimItem" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <p><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="myHeader"> Import Excel</span></p>
+        </div>
+        <hr />
+        <input type="hidden" value="@Model.IdPhim" name="id"/>
+        <input type="file" name="myFile" /><br />
+        <input type="submit" value="Xác Nhận" />
+      
+        
+    </form>
+</div>
+
+<br />
+
+
+<div class="myForm">
+    @using (Html.BeginForm("UploadMovie", "Admin", FormMethod.Post))
+    {
+        <div class="form-group">
+            <p><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="myHeader"> Thêm Tập Phim</span></p>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label>ID Phim:</label>
+            @Html.TextBoxFor(model => Model.IdPhim, Model.IdPhim.ToString(), new { @class = "form-control", @type = "text", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+            <label>Tên Phim:</label>
+            @Html.TextBoxFor(model => Model.TenPhim, Model.TenPhim, new { @class = "form-control", @type = "text", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+            <label>Tổng Số Tập Phim:</label>
+            @Html.TextBoxFor(model => Model.TongSoTap, Model.TongSoTap.ToString(), new { @class = "form-control", @type = "text", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+            <label>Tên Tập Phim Gần Đây Nhất:</label>
+            @Html.TextBoxFor(model => Model.TenTapPhimGanDayNhat, Model.TenTapPhimGanDayNhat, new { @class = "form-control", @type = "text", @readonly = "readonly" })
+        </div>
+
+        <div class="form-group">
+            <label>Tên Tập Phim:</label>
+            @Html.TextBoxFor(model => Model.TenTapPhim, new { @class = "form-control", @type = "text" })
+        </div>
+        <div class="form-group">
+            <label>Nguồn:</label>
+            @Html.TextBoxFor(model => Model.Link, new { @class = "form-control", @type = "text" })
+        </div>
+
+
+        <div class="form-group pull-right">
+            <input type="submit" value="Xác Nhận" class="btn btn-primary" />
+            <input type="button" value="Làm Mới" class="btn btn-danger" />
+        </div>
+        <div class="clearfix"></div>
+    }
+</div>
+
+<style>
+   
+    .myForm {
+        background-color: white;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        padding: 20px;
+    }
+
+   
+    .glyphicon.glyphicon-cog {
+        font-size: 26px;
+    }
+
+    .myHeader {
+        font-size: 28px;
+    }
+</style>
+
+<script>
+   
+</script>

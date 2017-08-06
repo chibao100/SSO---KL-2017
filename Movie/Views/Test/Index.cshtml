@@ -1,0 +1,144 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row myheader">
+            <div class="col-sm-3">
+                <button id="clickme">Click me</button> 
+            </div>
+            <div class="col-sm-9">
+                dasdad
+                dasdasd
+                dasdas
+            </div>
+        </div>
+
+     
+        <div class="row mycontent">
+            <div class="myleft">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Menu 1 Menu 1 Menu 1</a></li>
+                    <li><a href="#">Menu 2</a></li>
+                    <li><a href="#">Menu 3</a></li>
+                </ul>
+            </div>
+            <div class="myright">
+                <h1>12345</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+                <h1>dadadad</h1>
+            </div>
+        </div>
+        
+       
+    </div>
+   
+</body>
+</html>
+
+<style>
+
+    .myheader {
+        width:100%;
+        position: fixed;
+        background-color: blue;
+        top: 0;
+        z-index: 100;
+        height: 40px;
+    }
+
+    .myleft {
+        float: left;
+        width: 20%;
+
+    }
+
+    .mycontent {
+        margin-top: 40px;
+    } 
+    
+    .myright {
+        width: 80%;
+        overflow: hidden;
+        background-color:red;
+    }
+
+    .myleft2 {
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        width: 20%;
+        margin-top: 40px;
+    }
+
+
+    .myright2 {
+        margin-left: 20%;
+        width: 80%;
+    }
+
+    .myright3{
+        width:100%;
+    }
+
+   
+</style>
+
+<script>
+
+ 
+    $(document).ready(function () {
+        $('#clickme').click(function () {
+            var myleft = $('.myleft');
+            var myright = $('.myright')
+
+            myleft.removeClass("");
+            myright.removeClass("")
+
+            if (myleft.hasClass('hide')) {
+                myleft.removeClass('hide'); // show 
+                myleft.addClass('myleft2');
+                myright.removeClass('myright3');
+                myright.addClass('myright2');
+               
+            } else {
+                myleft.addClass('hide'); // hide
+               
+                myleft.removeClass('myleft2');
+                myright.addClass('myright3');
+                myright.removeClass('myright2');
+            }
+        });  
+           
+        
+    });
+</script>
