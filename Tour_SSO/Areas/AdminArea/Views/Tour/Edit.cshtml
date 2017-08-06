@@ -1,0 +1,182 @@
+﻿@model Tour_SSO.Models.Tour
+
+@{
+    ViewBag.Title = "Edit";
+    var StartPlace = Tour_SSO.Models.ViewModel.StartPlace.Place();
+}
+<script src="~/Lib/ckeditor/ckeditor.js"></script>
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Tour</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TourId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Price,  new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image,  new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Image,  new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Avaiable, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Avaiable, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(model => model.Avaiable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+
+                <select class="form-control" name="Note" id="Note">
+                    @for (int i = 0; i < StartPlace.Count(); i++)
+                    {
+                        if (@StartPlace[i] == Model.Note)
+                        {
+                            <option value="@StartPlace[i]" selected>@StartPlace[i]</option>
+                        }
+                        else
+                        {
+                            <option value="@StartPlace[i]">@StartPlace[i]</option>
+                        }
+
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tên Nước", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("Country", (SelectList)ViewBag.country, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tên Địa Điểm", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("TourPlace", (SelectList)ViewBag.tourPlace, new { @class = "form-control", @multiple = "multiple" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booked, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Booked, new { @class = "form-control", type = "number" } )
+                @Html.ValidationMessageFor(model => model.Booked, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status,  new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Status,  new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                <textarea id="Description" name="Description" cols="80" rows="10">
+                    <p>Hello <strong>CKEditor</strong></p>
+                </textarea>
+
+                <!-- (3): Code Javascript thay thế textarea có id='editor1' bởi CKEditor -->
+                <script>
+
+                    jQuery(document).ready(function () {
+                        CKEDITOR.replace("Description");
+                    });
+
+                </script>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(document).ready(function () {
+        $("#TourPlace").chosen({
+            no_results_text: "Oops, nothing found!",
+            search_contains: true
+        });
+     
+        $("#Country").change(function () {
+            var countryID = $(this).val();
+            var a = "";
+            $.ajax({
+                url: "/AdminArea/Tour/LoadCb2",
+                data: {countryID: countryID},
+                success: function (res) {
+                    $(res).each(function (i, e) {
+
+                        a = a + "<option value=\"" + e.TourPlaceId + "\">" + e.Name + "</option>";
+                        //alert(a);
+                    });
+                    $("#TourPlace").find('option').remove().end().append(a);
+                    $('#TourPlace').trigger("chosen:updated");
+                }
+            });
+        })
+        @*$("#Description").html("@Html.Raw(Model.Description.ToString())");*@
+    })
+
+</script>
