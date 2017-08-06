@@ -16,6 +16,7 @@ namespace Movie.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
+            //test khjjkhkhk
             UnitOfWork unitOfWork = new UnitOfWork(new movieEntities());
             CommonMovieViewModel model = new CommonMovieViewModel();
             string theloais = "";
