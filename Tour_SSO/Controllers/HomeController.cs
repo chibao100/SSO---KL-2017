@@ -73,7 +73,20 @@ namespace Tour_SSO.Controllers
         [HttpPost]
         public ActionResult TourOrder(FormCollection frm)
         {
-            //sahdashuhvhjvjh,vjhvjhbkjbiu
+
+            string FullName = frm["FullName"];
+            string Email = frm["Email"];
+            string Address = frm["Address"];
+            string Phone = frm["Phone"];
+            string Quantity = frm["Quantity"];
+            string Note = frm["Note"];
+            string Price = frm["Price"];
+            string TourID = frm["TourID"];
+            string TourName = frm["TourName"];
+            string Place = frm["Place"];
+            string Date = frm["Date"];
+
+
             return View();
         }
     }

@@ -2,70 +2,74 @@
 <h3 class="title-bg " style="color:#fc7700; font-family:'Book Antiqua';text-align:center;">
     Thông tin Tour
 </h3>
+<form action="/Home/TourOrder" method="post">
 
-<div class="row">
+    <div class="row">
 
-    <!-- Gallery Items 'Roboto',sans-serif
-    ================================================== -->
-    <div class="span12 gallery-single">
+        <!-- Gallery Items 'Roboto',sans-serif
+        ================================================== -->
+        <div class="span12 gallery-single">
 
-        <div class="row">
-            <div class="span6">
-                <img src="@Model.Image" class="align-left thumbnail" width="770" height="100" alt="image">
+            <div class="row">
+                <div class="span6">
+                    <img src="@Model.Image" class="align-left thumbnail" width="770" height="100" alt="image">
+                </div>
+                <div class="span6">
+                    <h2>@Model.Name<input type="hidden" value="@Model.Name" name="TourName" /></h2>
+                    <p class="lead">Rating</p>
+                    <ul class="project-info">
+                        <li><h6>Mã Tour:</h6> @Model.TourId <input type="hidden" value="@Model.TourId" name="TourID" /></li>
+                        <li><h6>Ngày khởi hành:</h6> @Html.FormatValue(Model.StartDate, "{0:dd-MM-yyyy}") <input type="hidden" value="@Html.FormatValue(Model.StartDate, "{0:dd-MM-yyyy}")" name="Date" /> </li>
+                        <li><h6>Nơi khởi hành:</h6> @Model.Note<input type="hidden" value="@Model.Note" name="Place" /></li>
+                        <li><h6>Số ngày:</h6> @Model.Days</li>
+                        <li><h6>Giá:</h6> @Html.FormatValue(Model.Price, "{0:#,###}") @Model.UnitPrice <input type="hidden" value="@Model.Price" name="Price" /> </li>
+                        <li><h6>Cỏn nhận:</h6> @Model.Avaiable</li>
+                    </ul>
+                    <a href="#" class="pull-right"><i class="icon-arrow-left"></i>Back to Gallery</a>
+                </div>
             </div>
-            <div class="span6">
-                <h2>@Model.Name</h2>
-                <p class="lead">Rating</p>
-                <ul class="project-info">
-                    <li><h6>Mã Tour:</h6> @Model.TourId</li>
-                    <li><h6>Ngày khởi hành:</h6> @Html.FormatValue(Model.StartDate, "{0:dd-MM-yyyy}")</li>
-                    <li><h6>Nơi khởi hành:</h6> @Model.Note</li>
-                    <li><h6>Số ngày:</h6> @Model.Days</li>
-                    <li><h6>Giá:</h6> @Html.FormatValue(Model.Price, "{0:#,###}") @Model.UnitPrice</li>
-                    <li><h6>Cỏn nhận:</h6> @Model.Avaiable</li>
-                </ul>
-                <a href="#" class="pull-right"><i class="icon-arrow-left"></i>Back to Gallery</a>
-            </div>
+        </div><!-- End gallery-single-->
+    </div><!-- End container row -->
+
+
+    <h3 class="title-bg " style="color:#fc7700; font-family:'Book Antiqua';text-align:center;">
+        Thông tin liên lạc
+    </h3>
+
+    <div class="row">
+        <div class="span5">
+            <label for="exampleInputEmail1" class="labelOrder">HỌ TÊN</label>
+            <input type="text" class="Iplarge span5" height="50" name="FullName">
         </div>
-    </div><!-- End gallery-single-->
-</div><!-- End container row -->
-
-
-<h3 class="title-bg " style="color:#fc7700; font-family:'Book Antiqua';text-align:center;">
-   Thông tin liên lạc
-</h3>
-
-<div class="row">
-    <div class="span5">
-        <label for="exampleInputEmail1" class="labelOrder">HỌ TÊN</label>
-        <input type="text" class="Iplarge span5" height="50" name="FullName">
+        <div class="span5">
+            <label for="exampleInputEmail1" class="labelOrder">EMAIL</label>
+            <input type="text" class="span5 Iplarge" name="Email" />
+        </div>
     </div>
-    <div class="span5">
-        <label for="exampleInputEmail1" class="labelOrder">EMAIL</label>
-        <input type="text" class="span5 Iplarge" name="Email" />
+    <div class="row">
+        <div class="span5">
+            <label for="exampleInputEmail1" class="labelOrder">ĐIỆN THOẠI</label>
+            <input type="text" class="Iplarge span5" name="Phone">
+        </div>
+        <div class="span5">
+            <label for="exampleInputEmail1" class="labelOrder">ĐỊA CHỈ</label>
+            <input type="text" class="span5 Iplarge" name="Address" />
+        </div>
+        <div class="span2">
+            <label for="exampleInputEmail1" class="labelOrder">SỐ LƯỢNG</label>
+            <input type="number" class="span2  Iplarge changeQuantity" name="Quantity" />
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="span5">
-        <label for="exampleInputEmail1" class="labelOrder">ĐIỆN THOẠI</label>
-        <input type="text" class="Iplarge span5" name="Phone">
+    <div class="row">
+        <div class="span12">
+            <label for="exampleInputEmail1" class="labelOrder">GHI CHÚ</label>
+            <textarea type="email" class="span12 note" rows="10"></textarea>
+        </div>
     </div>
-    <div class="span5">
-        <label for="exampleInputEmail1" class="labelOrder">ĐỊA CHỈ</label>
-        <input type="text" class="span5 Iplarge" name="Address" />
+    <div>
+        <input type="submit" value="Đặt"  />
     </div>
-    <div class="span2">
-        <label for="exampleInputEmail1" class="labelOrder">SỐ LƯỢNG</label>
-        <input type="number" class="span2  Iplarge changeQuantity" name="Quantity"  />
-    </div>
-</div>
-<div class="row">
-    <div class="span12">
-        <label for="exampleInputEmail1" class="labelOrder">GHI CHÚ</label>
-        <textarea type="email" class="span12 note" rows="10"></textarea>
-    </div>
-</div>
-   
+</form>
 
 
 <style>
