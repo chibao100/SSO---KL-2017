@@ -11,8 +11,7 @@ namespace Tour_SSO.Controllers
     {
         public ActionResult Index()
         {
-            string dis = "me.";
-            int k = 0;
+            
             UnitOfWork _unitOfWork = new UnitOfWork(new TourEntities());
             ViewBag.InTour = _unitOfWork.TourRepo.GetAll().Where(x => x.InOutType == 1).Take(4).ToList();
             ViewBag.OutTour = _unitOfWork.TourRepo.GetAll().Where(x => x.InOutType == 2).Take(4).ToList();
