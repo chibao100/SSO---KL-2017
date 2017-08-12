@@ -239,6 +239,7 @@
       <DependentUpon>Tour.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UnitOfWork.cs" />
+    <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Models\ViewModel\StartPlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -11,7 +11,7 @@ namespace Tour_SSO.Controllers
     {
         public ActionResult Index()
         {
-            int dis = "me.";
+            string dis = "me.";
             int k = 0;
             UnitOfWork _unitOfWork = new UnitOfWork(new TourEntities());
             ViewBag.InTour = _unitOfWork.TourRepo.GetAll().Where(x => x.InOutType == 1).Take(4).ToList();
@@ -63,10 +63,19 @@ namespace Tour_SSO.Controllers
             return View(model);
         }
 
-        public ActionResult TourOrder()
+        [HttpGet]
+        public ActionResult TourOrder(int id)
         {
-            return View();
+            UnitOfWork _unitOfWork = new UnitOfWork(new TourEntities());
+            var model = _unitOfWork.TourRepo.GetById(id);
+            return View(model);
         }
 
+        [HttpPost]
+        public ActionResult TourOrder(FormCollection frm)
+        {
+
+            return View();
+        }
     }
 }
